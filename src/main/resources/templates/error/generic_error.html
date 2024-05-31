@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+</head>
+<body>
+    <h1>Something went wrong</h1>
+    <p>An unexpected error occurred.</p>
+
+    <!--    <div th:utext="'&lt;!&#45;&#45;'" th:remove="tag"></div>-->
+    <div th:text="'Failed URL: ' +  ${url}">${url}</div>
+    <div th:text="'Exception: ' + ${exceptionMsg}">${exception.message}</div>
+    <ul th:remove="tag">
+        <li th:each="ste : ${stackTrace}">
+            <span th:text="${ste}">${ste}</span>
+        </li>
+    </ul>
+    <!--    <div th:utext="'&#45;&#45;&gt;'" th:remove="tag"></div>-->
+
+
+    <a href="/">Return to Home</a>
+</body>
+</html>

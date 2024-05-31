@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Form</title>
+</head>
+<body>
+    <h1 th:text="(${product == null} ? 'New Product' : 'Edit Product')"></h1>
+
+    <form th:action="@{/product/save}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="text" placeholder="Name" th:field="*{name}"/>
+        <input type="text" placeholder="Description" th:field="*{description}"/>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
