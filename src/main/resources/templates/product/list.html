@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+    <h1>Product List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.description}"></td>
+                <td>
+                    <div>
+                        <a th:href="${'/product/' + product.id}">Edit</a>
+                        <a th:href="${'/product/' + product.id + '/delete'}">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="${'/product/new'}">Create New Product</a>
+</body>
+</html>

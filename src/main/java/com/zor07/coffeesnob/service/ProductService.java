@@ -1,6 +1,7 @@
 package com.zor07.coffeesnob.service;
 
 import com.zor07.coffeesnob.entity.Product;
+import com.zor07.coffeesnob.exception.EntityNotFoundException;
 import com.zor07.coffeesnob.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +22,15 @@ public class ProductService {
 
     public Product findById(Long id) {
         return productRepository.findById(id)
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Product with id %s not found", id)));
     }
 
     public Product save(Product product) {
         return productRepository.save(product);
     }
 
-    public void delete(Product product) {
-        productRepository.delete(product);
+    public void deleteById(Long id) {
+        productRepository.deleteById(id);
     }
 
 }
