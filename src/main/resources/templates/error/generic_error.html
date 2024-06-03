@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Error</title>
-</head>
+<head th:replace="fragments/head "></head>
 <body>
+<!-- Navigation -->
+<div th:replace="fragments/nav :: nav "></div>
+<!-- Main Content -->
+<div class="container-flex container mt-4">
     <h1>Something went wrong</h1>
     <p>An unexpected error occurred.</p>
 
     <!--    <div th:utext="'&lt;!&#45;&#45;'" th:remove="tag"></div>-->
     <div th:text="'Failed URL: ' +  ${url}">${url}</div>
-    <div th:text="'Exception: ' + ${exceptionMsg}">${exception.message}</div>
+    <div th:text="'Exception: ' + ${exception.message}">${exception.message}</div>
     <ul th:remove="tag">
-        <li th:each="ste : ${stackTrace}">
+        <li th:each="ste : ${exception.stackTrace}">
             <span th:text="${ste}">${ste}</span>
         </li>
     </ul>
@@ -19,5 +21,11 @@
 
 
     <a href="/">Return to Home</a>
+</div>
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer "></div>
+
+<div th:replace="fragments/scripts"></div>
 </body>
 </html>

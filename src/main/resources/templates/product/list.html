@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-</head>
+<head th:replace="fragments/head "></head>
 <body>
-    <h1>Product List</h1>
-    <table border="1">
-        <thead>
+<!-- Navigation -->
+<div th:replace="fragments/nav :: nav "></div>
+
+<main>
+    <!-- Main Content -->
+    <div class="container-flex container mt-4">
+        <h1>Product List</h1>
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-
-        <tbody>
+            </thead>
+            <tbody>
             <tr th:each="product : ${products}">
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.description}"></td>
                 <td>
                     <div>
-                        <a th:href="${'/product/' + product.id}">Edit</a>
-                        <a th:href="${'/product/' + product.id + '/delete'}">Delete</a>
+                        <a class="btn btn-outline-primary btn-sm" th:href="${'/product/' + product.id}">Edit</a>
+                        <a class="btn btn-outline-danger btn-sm" th:href="${'/product/' + product.id + '/delete'}">Delete</a>
                     </div>
                 </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        <a class="btn btn-outline-success" th:href="${'/product/new'}">Create New Product</a>
+    </div>
+</main>
 
-    <a th:href="${'/product/new'}">Create New Product</a>
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer "></div>
+
+<div th:replace="fragments/scripts"></div>
 </body>
 </html>
