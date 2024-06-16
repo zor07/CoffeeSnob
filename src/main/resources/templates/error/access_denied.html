@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
+<body>
+<!-- Navigation -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+<!-- Main Content -->
+<div class="container-flex container mt-4">
+    <h1>Access Denied</h1>
+    <p>You are not allowed to view this page</p>
+    <a href="/">Return to Home</a>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+</html>

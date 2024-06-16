@@ -2,6 +2,7 @@ package com.zor07.coffeesnob.controller;
 
 import com.zor07.coffeesnob.exception.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,12 +19,19 @@ public class CustomExceptionHandler {
         return "error/not_found";
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String handleAccessDeniedException() {
+        return "error/access_denied";
+    }
+
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleException(Exception ex, Model model) {
-        model.addAttribute("exceptionMsg", ex.getMessage());
+        model.addAttribute("message", ex.getMessage());
         model.addAttribute("stackTrace", ex.getStackTrace());
-
         return "error/generic_error";
     }
+
 }
