@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/head}"></head>
+<body>
+<!-- Navigation -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<!-- Main Content -->
+<div class="container-flex container mt-4">
+    <h1 class="mt-4">Users</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Users</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+            <td>
+                <div>
+                    <a class="btn btn-primary" th:href="${'/users/' + user.id}">To User</a>
+                    <a class="btn btn-danger" th:href="${'/users/' + user.id + '/delete'}">Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-success" th:href="${'/users/new'}">Create New User</a>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/head}"></head>
+<body>
+<!-- Navigation -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<!-- Main Content -->
+<div class="container-flex container mt-4">
+    <h1>Login</h1>
+    <form th:action="@{/perform-login}" th:method="post">
+        <div class="form-group">
+            <input type="text"
+                   name="username"
+                   id="inputUsername"
+                   th:class="(${param.error} ? 'form-control is-invalid' : 'form-control')"
+                   placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input type="password"
+                   name="password"
+                   id="inputPassword"
+                   th:class="(${param.error} ? 'form-control is-invalid' : 'form-control')"
+                   placeholder="Password">
+        </div>
+        <div class="form-group" th:if="${param.error}">
+            <div class="text-danger">Illegal username or password</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+</html>
