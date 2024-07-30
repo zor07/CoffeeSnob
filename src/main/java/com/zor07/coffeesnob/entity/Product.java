@@ -12,10 +12,15 @@ public class Product {
     private String name;
     private String description;
 
-    public Product(Long id, String name, String description) {
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
+    public Product(Long id, String name, String description, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.category = category;
     }
 
     public Product() {
@@ -43,6 +48,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
