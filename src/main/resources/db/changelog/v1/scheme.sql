@@ -1,13 +1,41 @@
-DROP TABLE if exists product,
+DROP TABLE if exists unit,
+    menu_item,
+    category,
+    product,
     role,
     users,
     client,
     client_bonus_card cascade;
 
-CREATE TABLE IF NOT EXISTS product (
-     id SERIAL PRIMARY KEY,
-     name VARCHAR(255) NOT NULL,
-     description TEXT
+CREATE TABLE if not exists category
+(
+    id   BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE if not exists unit
+(
+    id   BIGSERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE if not exists product
+(
+    id          BIGSERIAL PRIMARY KEY,
+    category_id bigint references category (id) on delete cascade,
+    name        VARCHAR(255) NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE menu_item
+(
+    id         BIGSERIAL PRIMARY KEY,
+    product_id BIGINT         NOT NULL REFERENCES product (id),
+    unit_id    BIGINT         NOT NULL REFERENCES unit (id),
+    quantity   DECIMAL(5, 2)  NOT NULL,
+    price      DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product (id),
+    FOREIGN KEY (unit_id) REFERENCES unit (id)
 );
 
 CREATE TABLE if not exists role
