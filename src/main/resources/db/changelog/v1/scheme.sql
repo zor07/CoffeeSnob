@@ -64,7 +64,8 @@ create table if not exists client
     name               varchar(255),
     birthday           date,
     email              varchar(255),
-    registration_state varchar(255)
+    phone              varchar(50) unique,
+    registration_state varchar(255) CHECK (registration_state IN ('INIT', 'ASK_NAME', 'ASK_EMAIL', 'ASK_PHONE', 'ASK_BIRTHDATE', 'REGISTERED'))
 );
 
 create table if not exists client_bonus_card (

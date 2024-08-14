@@ -16,11 +16,13 @@ public class ClientRegistrationHandler {
     public ClientRegistrationHandler(InitRegistrationHandler initRegistrationHandler,
                                      AskNameRegistrationHandler askNameRegistrationHandler,
                                      AskBirthDateRegistrationHandler askBirthDateRegistrationHandler,
+                                     AskPhoneRegistrationHandler askPhoneRegistrationHandler,
                                      AskEmailRegistrationHandler askEmailRegistrationHandler) {
 
         registrationHandlers.put(RegistrationState.INIT, initRegistrationHandler);
         registrationHandlers.put(RegistrationState.ASK_NAME, askNameRegistrationHandler);
         registrationHandlers.put(RegistrationState.ASK_BIRTHDATE, askBirthDateRegistrationHandler);
+        registrationHandlers.put(RegistrationState.ASK_PHONE, askPhoneRegistrationHandler);
         registrationHandlers.put(RegistrationState.ASK_EMAIL, askEmailRegistrationHandler);
     }
 
