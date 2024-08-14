@@ -18,6 +18,7 @@ public class Client {
     private Long id;
     private String name;
     private String email;
+    private String phone;
     private LocalDate birthday;
     @Column(nullable = false, unique = true)
     private Long chatId;
@@ -30,10 +31,11 @@ public class Client {
         this.registrationState = registrationState;
     }
 
-    public Client(Long id, String name, String email, LocalDate birthday, Long chatId, String registrationState) {
+    public Client(Long id, String name, String email, String phone, LocalDate birthday, Long chatId, String registrationState) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.phone = phone;
         this.birthday = birthday;
         this.chatId = chatId;
         this.registrationState = registrationState;
@@ -63,6 +65,14 @@ public class Client {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public LocalDate getBirthday() {
         return birthday;
     }
@@ -83,7 +93,7 @@ public class Client {
         return registrationState;
     }
 
-    public void setRegistrationState(String registrationStatus) {
-        this.registrationState = registrationStatus;
+    public void setRegistrationState(String registrationState) {
+        this.registrationState = registrationState;
     }
 }

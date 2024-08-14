@@ -20,4 +20,15 @@ public interface ClientBonusCardRepository extends JpaRepository<ClientBonusCard
     )
     Optional<ClientBonusCard> findByChatId(@Param("chatId") Long chatId);
 
+    @Query(
+            nativeQuery = true,
+            value = """
+                select bc.*
+                from client_bonus_card bc
+                join client c on bc.client_id = c.id
+                where c.phone = :phone
+            """
+    )
+    Optional<ClientBonusCard> findByPhone(@Param("phone") String phone);
+
 }
