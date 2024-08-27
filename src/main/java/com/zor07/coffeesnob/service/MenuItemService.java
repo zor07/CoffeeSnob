@@ -25,6 +25,10 @@ public class MenuItemService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("MenuItem with id %s not found", id)));
     }
 
+    public List<MenuItem> findByIds(List<Long> ids) {
+        return menuItemRepository.findByIdIn(ids);
+    }
+
     public MenuItem save(MenuItem menuItem) {
         return menuItemRepository.save(menuItem);
     }

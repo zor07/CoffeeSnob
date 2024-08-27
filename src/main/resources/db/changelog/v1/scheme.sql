@@ -74,3 +74,33 @@ create table if not exists client_bonus_card (
      amount             int not null default 0,
      discount_percent   int not null default 5
 );
+
+CREATE TABLE IF NOT EXISTS orders
+(
+    id                      BIGSERIAL PRIMARY KEY,
+    client_id               BIGINT REFERENCES client(id),
+    bonus_points_action     VARCHAR(5) CHECK (bonus_points_action IN ('USE', 'EARN')),
+    user_id                 BIGINT NOT NULL REFERENCES users(id),
+    total_amount            DECIMAL(10, 2) NOT NULL,
+    discount_amount         DECIMAL(10, 2) NOT NULL,
+    final_amount            DECIMAL(10, 2) NOT NULL,
+    created_at              TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS order_item
+(
+    id            BIGSERIAL PRIMARY KEY,
+    order_id      BIGINT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+    menu_item_id  BIGINT NOT NULL REFERENCES menu_item(id),
+    quantity      DECIMAL(5, 2) NOT NULL,
+    price         DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS client_bonus_card_transaction
+(
+    id                BIGSERIAL PRIMARY KEY,
+    order_id          BIGINT REFERENCES orders(id) ON DELETE CASCADE,
+    transaction_type  VARCHAR(50) NOT NULL CHECK (transaction_type IN ('CREDIT', 'DEBIT')),
+    points            INT NOT NULL,
+    transaction_date  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

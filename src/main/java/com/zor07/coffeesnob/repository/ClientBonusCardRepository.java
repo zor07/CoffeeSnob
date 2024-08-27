@@ -31,4 +31,6 @@ public interface ClientBonusCardRepository extends JpaRepository<ClientBonusCard
     )
     Optional<ClientBonusCard> findByPhone(@Param("phone") String phone);
 
+    Optional<ClientBonusCard> findByClientId(Long clientId);
+
 }
