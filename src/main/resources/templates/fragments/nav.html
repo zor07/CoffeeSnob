@@ -16,6 +16,11 @@
             </div>
             <div sec:authorize="isAuthenticated()">
                 <li class="nav-item">
+                    <a class="nav-link" href="/order">New Order</a>
+                </li>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <li class="nav-item">
                     <a class="nav-link" href="/menu">Menu</a>
                 </li>
             </div>
