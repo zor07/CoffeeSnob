@@ -4,13 +4,27 @@ volumes:
   pg_coffee_db:
 
 services:
+  app:
+    restart: always
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - coffee_demo_db
+    environment:
+      DB_URL: ${DB_URL}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      TG_TOKEN: ${TG_TOKEN}
+      JAVA_OPTS: '-Xmx512m'
+
   coffee_demo_db:
     image: postgres
     restart: always
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=coffee_snob
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: coffee_snob
     volumes:
       - pg_coffee_db:/var/lib/postgresql/data
     ports:
