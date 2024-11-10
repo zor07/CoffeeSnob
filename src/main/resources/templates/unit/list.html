@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/head}"></head>
+<body>
+<!-- Navigation -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<main>
+    <!-- Main Content -->
+    <div class="container-flex container mt-4">
+        <h1>Unit of Measure</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="unit : ${units}">
+                <td th:text="${unit.name}"></td>
+                <td>
+                    <div>
+                        <a class="btn btn-outline-primary btn-sm" th:href="${'/unit/' + unit.id}">Edit</a>
+                        <a class="btn btn-outline-danger btn-sm" th:href="${'/unit/' + unit.id + '/delete'}">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-outline-success" th:href="${'/unit/new'}">Create New Unit</a>
+    </div>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+</html>

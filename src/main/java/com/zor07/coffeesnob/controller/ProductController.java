@@ -1,7 +1,9 @@
 package com.zor07.coffeesnob.controller;
 
+import com.zor07.coffeesnob.dto.CategoryDto;
 import com.zor07.coffeesnob.dto.ProductDto;
 import com.zor07.coffeesnob.entity.Product;
+import com.zor07.coffeesnob.service.CategoryService;
 import com.zor07.coffeesnob.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +16,18 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService,
+                             CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
-
     @GetMapping
     public String allProducts(Model model) {
         List<ProductDto> products = productService.findAll()
                 .stream()
-                .map(ProductDto::fromProduct)
+                .map(ProductDto::toDto)
                 .toList();
 
         model.addAttribute("products", products);
@@ -32,13 +36,24 @@ public class ProductController {
 
     @GetMapping("/new")
     public String newProduct(Model model) {
-        model.addAttribute("product", ProductDto.fromProduct(new Product()));
+        List<CategoryDto> categories = categoryService.findAll()
+                .stream()
+                .map(CategoryDto::from)
+                .toList();
+        model.addAttribute("categories", categories);
+
+        model.addAttribute("product", ProductDto.toDto(new Product()));
         return "product/form";
     }
 
     @GetMapping("/{productId}")
     public String edit(@PathVariable Long productId, Model model) {
-        ProductDto product = ProductDto.fromProduct(productService.findById(productId));
+        List<CategoryDto> categories = categoryService.findAll()
+                .stream()
+                .map(CategoryDto::from)
+                .toList();
+        model.addAttribute("categories", categories);
+        ProductDto product = ProductDto.toDto(productService.findById(productId));
         model.addAttribute("product", product);
         return "product/form";
     }
